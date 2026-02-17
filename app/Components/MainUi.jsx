@@ -58,26 +58,57 @@ export default function MainUI() {
             {/* CHARTS + SIDE PANEL */}
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
 
-                {/* LEFT — Portfolio */}
-                <GlassCard className="xl:col-span-2 flex flex-col">
-                    <div className="flex justify-between items-center mb-6">
+                {/* PORTFOLIO */}
+                <GlassCard className="xl:col-span-2 flex flex-col p-6 relative">
+
+                    {/* HEADER */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+
+                        {/* BALANCE */}
                         <div>
-                            <h3 className="font-semibold text-textColor">Portfolio Performance</h3>
-                            <p className="text-xs text-muted mt-1">Monthly growth overview</p>
+                            <p className="text-xs text-muted">Total Balance</p>
+
+                            <h2 className="text-3xl font-semibold text-textColor tracking-tight">
+                                $12,450
+                            </h2>
+
+                            <div className="flex items-center gap-2 mt-1">
+                                <span className="text-xs px-2 py-1 rounded-md bg-success/10 text-success font-medium">
+                                    +12.4%
+                                </span>
+                                <span className="text-xs text-muted">vs last month</span>
+                            </div>
                         </div>
-                        <button className="text-sm text-primary font-medium hover:underline">
-                            View Report
-                        </button>
+
+                        {/* RANGE SELECTOR */}
+                        <div className="flex gap-2">
+                            {["1M", "3M", "6M", "1Y"].map((item) => (
+                                <button
+                                    key={item}
+                                    className="
+            px-3 py-1.5 text-xs rounded-lg
+            border border-border
+            hover:bg-surface transition
+          "
+                                >
+                                    {item}
+                                </button>
+                            ))}
+                        </div>
+
                     </div>
 
-                    <div className="flex-1 h-72">
+                    {/* CHART */}
+                    <div className="flex-1 h-[320px]">
                         <PortfolioChart />
                     </div>
+
                 </GlassCard>
 
 
-                {/* RIGHT — Widgets Column */}
-                <div className="flex flex-col gap-4 sm:gap-6 h-full">
+
+                {/* RIGHT — Widgets */}
+                <div className="flex flex-col gap-6 h-full">
 
                     <CreditCardWidget />
 
@@ -90,6 +121,7 @@ export default function MainUI() {
                 </div>
 
             </div>
+
 
 
             {/* CASH FLOW BELOW */}
