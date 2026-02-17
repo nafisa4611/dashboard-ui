@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { FiUser, FiBookOpen, FiEdit3, FiLogOut } from "react-icons/fi";
 
@@ -31,9 +32,9 @@ export default function AvatarMenu() {
       {/* Dropdown */}
       {open && (
         <div className="absolute right-0 mt-2 w-44 rounded-xl border border-border bg-surface shadow-lg text-textColor">
-          <MenuItem icon={<FiUser />} label="My Profile" />
-          <MenuItem icon={<FiBookOpen />} label="My Notes" />
-          <MenuItem icon={<FiEdit3 />} label="My Blogs" />
+          <MenuLink href="/profile" icon={<FiUser />} label="My Profile" close={() => setOpen(false)} />
+          <MenuLink href="/notes" icon={<FiBookOpen />} label="My Notes" close={() => setOpen(false)} />
+          <MenuLink href="/blog" icon={<FiEdit3 />} label="My Blogs" close={() => setOpen(false)} />
 
           <div className="my-1 h-px bg-border" />
 
@@ -51,14 +52,15 @@ export default function AvatarMenu() {
   );
 }
 
-function MenuItem({ icon, label }) {
+function MenuLink({ href, icon, label, close }) {
   return (
-    <button
-      className="w-full flex items-center gap-3 px-4 py-2 text-sm
-                 text-body hover:bg-surface-muted transition"
+    <Link
+      href={href}
+      onClick={close}
+      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-textBody hover:bg-surface-muted transition"
     >
       {icon}
       {label}
-    </button>
+    </Link>
   );
 }

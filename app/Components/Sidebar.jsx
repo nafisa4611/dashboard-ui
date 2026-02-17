@@ -12,6 +12,7 @@ import {
 
 import SidebarItem from "./SidebarItem";
 import SidebarSubItem from "./SidebarSubItem";
+import Link from "next/link";
 
 export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState(null);
@@ -24,11 +25,11 @@ export default function Sidebar() {
     <aside className="w-56 h-screen bg-surface border-r border-border flex flex-col">
       {/* Logo */}
       <div className="h-16 flex items-center px-6 text-lg font-semibold text-primary">
-        FinTrack
+        <Link href="/">FinTrack</Link>
       </div>
 
       <nav className="flex-1 px-2 space-y-1">
-        <SidebarItem icon={FiHome} label="Dashboard" active />
+        <SidebarItem icon={FiHome} label="Dashboard" href="/" active />
 
         {/* Portfolio */}
         <SidebarItem
@@ -40,10 +41,10 @@ export default function Sidebar() {
         />
         {openMenu === "portfolio" && (
           <>
-            <SidebarSubItem label="Overview" />
-            <SidebarSubItem label="Assets" />
-            <SidebarSubItem label="Performance" />
-            <SidebarSubItem label="Allocation" />
+            <SidebarSubItem label="Overview" href="/portfolio" />
+            <SidebarSubItem label="Assets" href="/portfolio/assets" />
+            <SidebarSubItem label="Performance" href="/portfolio/performance" />
+            <SidebarSubItem label="Allocation" href="/portfolio/allocation" />
           </>
         )}
 
@@ -57,10 +58,10 @@ export default function Sidebar() {
         />
         {openMenu === "transactions" && (
           <>
-            <SidebarSubItem label="All Transactions" />
-            <SidebarSubItem label="Income" />
-            <SidebarSubItem label="Expenses" />
-            <SidebarSubItem label="Transfers" />
+            <SidebarSubItem label="All Transactions" href="/transactions" />
+            <SidebarSubItem label="Income" href="/transactions/income" />
+            <SidebarSubItem label="Expenses" href="/transactions/expenses" />
+            <SidebarSubItem label="Transfers" href="/transactions/transfers" />
           </>
         )}
 
@@ -74,9 +75,9 @@ export default function Sidebar() {
         />
         {openMenu === "analytics" && (
           <>
-            <SidebarSubItem label="Overview" />
-            <SidebarSubItem label="Cash Flow" />
-            <SidebarSubItem label="Categories" />
+            <SidebarSubItem label="Overview" href="/analytics" />
+            <SidebarSubItem label="Cash Flow" href="/analytics/cash-flow" />
+            <SidebarSubItem label="Categories" href="/analytics/categories" />
           </>
         )}
 
@@ -90,15 +91,15 @@ export default function Sidebar() {
         />
         {openMenu === "budgets" && (
           <>
-            <SidebarSubItem label="Monthly" />
-            <SidebarSubItem label="Categories" />
+            <SidebarSubItem label="Monthly" href="/budgets" />
+            <SidebarSubItem label="Categories" href="/budgets/categories" />
           </>
         )}
       </nav>
 
       {/* Bottom */}
       <div className="px-2 pb-4">
-        <SidebarItem icon={FiSettings} label="Settings" />
+        <SidebarItem icon={FiSettings} label="Settings" href="/settings" />
       </div>
     </aside>
   );
