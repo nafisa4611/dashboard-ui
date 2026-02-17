@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #155DFC;
+  --color-secondary: #294A70;
+  --color-accent: #7C3AED;
+  --color-textColor: #0F172A;
+  --color-textBody: #475569;
+  --color-muted: #64748B;
+  --color-border: #E2E8F0;
+  --color-bg: #F5F7FB;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: color-mix(in srgb, var(--color-bg) 92%, black);
+  --color-focus: var(--color-primary);
+  --color-danger: #DC2626;
+  --color-success: #16A34A;
+  --color-warning: #F59E0B
+}
+/* ===============================
+   Dark Theme
+================================ */
+
+.dark,
+[data-theme="dark"] {
+  --color-primary: #FAA023;
+  --color-secondary: #60A5FA;
+  --color-accent: #FBBF24;
+
+  --color-textColor: #E2E8F0;
+  --color-textBody: #9CA3AF;
+  --color-muted: #64748B;
+
+  --color-border: #1E293B;
+  --color-bg: #020617;
+
+  --color-surface: #0B1220;
+  --color-surface-muted: color-mix(
+    in srgb,
+    var(--color-bg) 88%,
+    white
+  );
+
+  --color-focus: var(--color-accent);
+  --color-danger: #F87171;
+  --color-success: #4ADE80;
+}
+/* ===============================
+   Retro Theme (DaisyUI inspired)
+================================ */
+
+[data-theme="retro"] {
+  --color-primary: #EF9995;      
+  --color-secondary: #A4CBB4;    
+  --color-accent: #DC8850;       
+  --color-textColor: #2E282A;    
+  --color-textBody: #4B3F42;
+  --color-muted: #8C7A7E;
+  --color-border: #E4D8C9;
+  --color-bg: #F6F1E9;
+
+  --color-surface: var(--color-bg);
+  --color-surface-muted: color-mix(
+    in srgb,
+    var(--color-bg) 90%,
+    black
+  );
+
+  --color-focus: var(--color-accent);
+  --color-danger: #C2410C;
+  --color-success: #3F7D20;
+}
+
+/* ===============================
+   Ocean Theme (DaisyUI inspired)
+================================ */
+
+[data-theme="ocean"] {
+  --color-primary: #0EA5E9;
+  --color-secondary: #0369A1;
+  --color-accent: #22D3EE;
+
+  --color-textColor: #082F49;
+  --color-textBody: #075985;
+  --color-muted: #7DD3FC;
+
+  --color-border: #BAE6FD;
+  --color-bg: #F0F9FF;
+
+  --color-surface: var(--color-bg);
+  --color-surface-muted: color-mix(
+    in srgb,
+    var(--color-bg) 90%,
+    black
+  );
+
+  --color-focus: var(--color-accent);
+  --color-danger: #DC2626;
+  --color-success: #16A34A;
+}
+/* ===============================
+   Coffee Theme
+================================ */
+
+[data-theme="coffee"] {
+  --color-primary: #c59f61;      
+  --color-secondary: #6F4E37;    
+  --color-accent: #FBBF24;     
+
+  --color-textColor: #F5EDE3;
+  --color-textBody: #E7D7C7;
+  --color-muted: #B89B84;
+
+  --color-border: #3A2A20;
+  --color-bg: #261c25;
+
+  --color-surface: #241A14;
+  --color-surface-muted: color-mix(
+    in srgb,
+    var(--color-surface) 85%,
+    black
+  );
+
+  --color-focus: var(--color-primary);
+  --color-danger: #F87171;
+  --color-success: #4ADE80;
+}
+
+
+/* ===============================
+   Cyberpunk Dark Theme
+================================ */
+
+[data-theme="cyberpunk"] {
+  --color-primary: #7C3AED;     
+  --color-secondary: #22D3EE;    
+  --color-accent: #F472B6;      
+
+  --color-textColor: #EDE9FE;
+  --color-textBody: #C4B5FD;
+  --color-muted: #6B21A8;
+
+  --color-border: #2E1065;
+  --color-bg: #0A001A;
+
+  --color-surface: #12002E;
+  --color-surface-muted: color-mix(
+    in srgb,
+    var(--color-surface) 85%,
+    black
+  );
+
+  --color-focus: var(--color-secondary);
+  --color-danger: #FB7185;
+  --color-success: #4ADE80;
+}
+
+/* ===============================
+   Forest / Nature Theme
+================================ */
+
+[data-theme="forest"] {
+  --color-primary: #3A7D44;     
+  --color-secondary: #2F5D50;    
+  --color-accent: #F4C430;      
+
+  --color-textColor: #E6F2EA;
+  --color-textBody: #CFE3D8;
+  --color-muted: #8FB3A2;
+
+  --color-border: #254035;
+  --color-bg: #0F1A14;
+
+  --color-surface: #16261D;
+  --color-surface-muted: color-mix(
+    in srgb,
+    var(--color-surface) 85%,
+    black
+  );
+
+  --color-focus: var(--color-accent);
+  --color-danger: #F87171;
+  --color-success: #4ADE80;
+}
+
+/* ===============================
+   GLOBAL SCROLLBAR (Theme-aware)
+================================ */
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-muted) transparent;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-primary) 90%, black),
+    color-mix(in srgb, var(--color-primary) 70%, black)
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-primary) 95%, black),
+    color-mix(in srgb, var(--color-primary) 80%, black)
+  );
+}
+
+/* Show scrollbar on hover (like sidebar) */
+body:hover ::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
