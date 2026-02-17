@@ -2,15 +2,13 @@
 
 import Link from "next/link";
 
-export default function SidebarSubItem({ label, href, collapsed }) {
+export default function SidebarSubItem({ label, href }) {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-10 py-2 rounded-lg text-sm text-muted hover:bg-surface-muted transition ${
-        collapsed ? "px-4 justify-center" : ""
-      }`}
+      className="flex items-center px-4 py-2 text-sm text-muted rounded-lg hover:bg-surface-muted transition"
     >
-      {!collapsed && label}
+      {label}
     </Link>
   );
 }

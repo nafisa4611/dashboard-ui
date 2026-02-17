@@ -1,8 +1,10 @@
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Sidebar from "./Components/Sidebar";
-import Navbar from "./Components/Navbar";
+
 import { ThemeProvider } from "./Providers/ThemeProvider";
+import DashboardLayout from "./Components/DashboardLayout";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,36 +22,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
-          <div className="flex h-screen">
-
-            {/* Sidebar */}
-            <aside className="w-56 bg-surface text-primary fixed left-0 top-0 h-full">
-              <Sidebar />
-            </aside>
-
-            {/* Right side (Navbar + Content) */}
-            <div className="flex flex-col flex-1 ml-56">
-
-              {/* Navbar */}
-              <header className="h-16 bg-surface border border-border shadow flex items-center px-6 sticky top-0 z-10">
-                <Navbar />
-              </header>
-
-              {/* Main content */}
-              <main className="flex-1 overflow-y-auto bg-surface p-6">
-                {children}
-              </main>
-
-            </div>
-          </div>
+          <DashboardLayout>{children}</DashboardLayout>
         </ThemeProvider>
       </body>
     </html>
   );
 }
+

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Pie } from "react-chartjs-2";
@@ -26,9 +25,16 @@ const data = {
 
 export default function SpendingDonut() {
   return (
-    <div className="p-6 rounded-2xl bg-surface border border-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-      <h3 className="text-textColor font-semibold mb-4">Spending Breakdown</h3>
-      <Pie data={data} />
+    <div className="w-full h-full p-6 rounded-2xl bg-surface border border-border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
+      
+      <h3 className="text-textColor font-semibold mb-4">
+        Spending Breakdown
+      </h3>
+
+      <div className="flex-1 flex items-center justify-center">
+        <Pie data={data} />
+      </div>
+
     </div>
   );
 }

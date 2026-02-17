@@ -1,13 +1,9 @@
 import MainUI from "./Components/MainUi";
 
-export default function page() {
+export default function Page() {
   return (
-    <>
-      <div className=''>
-        <MainUI />
-      </div>
-
-
-    </>
-  )
+    <div className="w-full">
+      <MainUI />
+    </div>
+  );
 }

@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 
-export default function SidebarItem({ icon: Icon, label, href, collapsed, active, onClick, hasChildren, open }) {
+export default function SidebarItem({ icon: Icon, label, href, collapsed, hasChildren, open, onClick }) {
   return (
     <>
       {href ? (
         <Link
           href={href}
           className={`flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-muted transition ${
-            active ? "bg-surface-muted font-semibold" : ""
+            collapsed ? "justify-center" : ""
           }`}
         >
           <Icon className="text-lg" />
@@ -19,7 +19,7 @@ export default function SidebarItem({ icon: Icon, label, href, collapsed, active
         <button
           onClick={onClick}
           className={`flex items-center gap-3 px-4 py-3 rounded-lg w-full hover:bg-surface-muted transition ${
-            active ? "bg-surface-muted font-semibold" : ""
+            collapsed ? "justify-center" : ""
           }`}
         >
           <Icon className="text-lg" />

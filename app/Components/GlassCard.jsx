@@ -1,15 +1,17 @@
-export default function GlassCard({ children }) {
+export default function GlassCard({ children, className = "" }) {
   return (
     <div
-      className="
+      className={`
+        w-full
         backdrop-blur-xl
         bg-white/60
         dark:bg-white/5
         border border-white/20
         shadow-xl
         rounded-2xl
-        p-6
-      "
+        p-4 sm:p-6
+        ${className}
+      `}
     >
       {children}
     </div>
