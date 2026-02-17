@@ -1,15 +1,16 @@
+"use client";
 
+import Link from "next/link";
 
-export default function SidebarSubItem({ label }) {
+export default function SidebarSubItem({ label, href, collapsed }) {
   return (
-    <button
-      className="
-        w-full text-left pl-12 pr-4 py-1.5 text-sm
-        text-muted hover:text-primary hover:bg-surface-muted rounded-md
-        transition
-      "
+    <Link
+      href={href}
+      className={`flex items-center gap-3 px-10 py-2 rounded-lg text-sm text-muted hover:bg-surface-muted transition ${
+        collapsed ? "px-4 justify-center" : ""
+      }`}
     >
-      {label}
-    </button>
+      {!collapsed && label}
+    </Link>
   );
 }

@@ -8,38 +8,57 @@ import {
   FiTrendingUp,
   FiTarget,
   FiSettings,
+  FiChevronLeft,
+  FiChevronRight,
 } from "react-icons/fi";
-
 import SidebarItem from "./SidebarItem";
 import SidebarSubItem from "./SidebarSubItem";
 import Link from "next/link";
 
 export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState(null);
+  const [collapsed, setCollapsed] = useState(false); // ✅ new state
 
-  const toggle = (menu) => {
-    setOpenMenu(openMenu === menu ? null : menu);
-  };
+  const toggle = (menu) => setOpenMenu(openMenu === menu ? null : menu);
+  const toggleCollapse = () => setCollapsed(!collapsed);
 
   return (
-    <aside className="w-56 h-screen bg-surface border-r border-border flex flex-col">
-      {/* Logo */}
-      <div className="h-16 flex items-center px-6 text-lg font-semibold text-primary">
-        <Link href="/">FinTrack</Link>
+    <aside
+      className={`h-screen bg-surface border-r border-border flex flex-col transition-all duration-300 ${
+        collapsed ? "w-20" : "w-56"
+      }`}
+    >
+      {/* Logo + Collapse Button */}
+      <div className="h-16 flex items-center justify-between px-4">
+        {!collapsed ? (
+          <Link href="/" className="text-lg font-semibold text-primary">
+            FinTrack
+          </Link>
+        ) : (
+          <span className="text-lg font-semibold text-primary">FT</span>
+        )}
+
+        <button
+          onClick={toggleCollapse}
+          className="p-1 rounded hover:bg-surface-muted transition"
+        >
+          {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
+        </button>
       </div>
 
+      {/* Nav */}
       <nav className="flex-1 px-2 space-y-1">
-        <SidebarItem icon={FiHome} label="Dashboard" href="/" active />
+        <SidebarItem icon={FiHome} label="Dashboard" href="/" collapsed={collapsed} active />
 
-        {/* Portfolio */}
         <SidebarItem
           icon={FiPieChart}
           label="Portfolio"
           hasChildren
           open={openMenu === "portfolio"}
           onClick={() => toggle("portfolio")}
+          collapsed={collapsed}
         />
-        {openMenu === "portfolio" && (
+        {openMenu === "portfolio" && !collapsed && (
           <>
             <SidebarSubItem label="Overview" href="/portfolio" />
             <SidebarSubItem label="Assets" href="/portfolio/assets" />
@@ -48,15 +67,16 @@ export default function Sidebar() {
           </>
         )}
 
-        {/* Transactions */}
+        
         <SidebarItem
           icon={FiCreditCard}
           label="Transactions"
           hasChildren
           open={openMenu === "transactions"}
           onClick={() => toggle("transactions")}
+          collapsed={collapsed}
         />
-        {openMenu === "transactions" && (
+        {openMenu === "transactions" && !collapsed && (
           <>
             <SidebarSubItem label="All Transactions" href="/transactions" />
             <SidebarSubItem label="Income" href="/transactions/income" />
@@ -72,14 +92,34 @@ export default function Sidebar() {
           hasChildren
           open={openMenu === "analytics"}
           onClick={() => toggle("analytics")}
+          collapsed={collapsed}
         />
-        {openMenu === "analytics" && (
+        {openMenu === "analytics" && !collapsed && (
           <>
             <SidebarSubItem label="Overview" href="/analytics" />
             <SidebarSubItem label="Cash Flow" href="/analytics/cash-flow" />
             <SidebarSubItem label="Categories" href="/analytics/categories" />
           </>
         )}
+
+        {/*  Wallet */}
+        <SidebarItem
+          icon={FiCreditCard}
+          label="Cards"
+          hasChildren
+          open={openMenu === "wallet"}
+          onClick={() => toggle("wallet")}
+          collapsed={collapsed}
+        />
+
+        {openMenu === "wallet" && !collapsed && (
+          <>
+            <SidebarSubItem label="Overview" href="/wallet" />
+            <SidebarSubItem label="List of Cards" href="/wallet/cards" />
+            <SidebarSubItem label="Balance" href="/wallet/balance" />
+          </>
+        )}
+
 
         {/* Budgets */}
         <SidebarItem
@@ -88,6 +128,7 @@ export default function Sidebar() {
           hasChildren
           open={openMenu === "budgets"}
           onClick={() => toggle("budgets")}
+          collapsed={collapsed}
         />
         {openMenu === "budgets" && (
           <>
@@ -99,7 +140,7 @@ export default function Sidebar() {
 
       {/* Bottom */}
       <div className="px-2 pb-4">
-        <SidebarItem icon={FiSettings} label="Settings" href="/settings" />
+        <SidebarItem icon={FiSettings} label="Settings" href="/settings" collapsed={collapsed} />
       </div>
     </aside>
   );

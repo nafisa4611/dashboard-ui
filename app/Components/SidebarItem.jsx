@@ -1,39 +1,32 @@
+"use client";
 
+import Link from "next/link";
 
-import { FiChevronDown } from "react-icons/fi";
-
-export default function SidebarItem({
-  icon: Icon,
-  label,
-  active = false,
-  open = false,
-  onClick,
-  hasChildren = false,
-}) {
+export default function SidebarItem({ icon: Icon, label, href, collapsed, active, onClick, hasChildren, open }) {
   return (
-    <button
-      onClick={onClick}
-      className={`
-        w-full flex items-center justify-between px-4 py-2 rounded-lg text-sm font-medium
-        transition
-        ${
-          active
-            ? "bg-surface-muted text-textColor"
-            : "text-textBody hover:bg-surface-muted"
-        }
-      `}
-    >
-      <div className="flex items-center gap-3">
-        <Icon size={18} />
-        {label}
-      </div>
-
-      {hasChildren && (
-        <FiChevronDown
-          size={14}
-          className={`transition ${open ? "rotate-180" : ""}`}
-        />
+    <>
+      {href ? (
+        <Link
+          href={href}
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-surface-muted transition ${
+            active ? "bg-surface-muted font-semibold" : ""
+          }`}
+        >
+          <Icon className="text-lg" />
+          {!collapsed && <span>{label}</span>}
+        </Link>
+      ) : (
+        <button
+          onClick={onClick}
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg w-full hover:bg-surface-muted transition ${
+            active ? "bg-surface-muted font-semibold" : ""
+          }`}
+        >
+          <Icon className="text-lg" />
+          {!collapsed && <span>{label}</span>}
+          {hasChildren && !collapsed && <span className="ml-auto">{open ? "▾" : "▸"}</span>}
+        </button>
       )}
-    </button>
+    </>
   );
 }
