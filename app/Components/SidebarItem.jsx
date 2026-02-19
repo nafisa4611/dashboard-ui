@@ -12,7 +12,7 @@ export default function SidebarItem({ icon: Icon, label, href, collapsed, hasChi
             collapsed ? "justify-center" : ""
           }`}
         >
-          <Icon className="text-lg" />
+          <Icon className="text-lg text-secondary" />
           {!collapsed && <span>{label}</span>}
         </Link>
       ) : (
@@ -22,7 +22,7 @@ export default function SidebarItem({ icon: Icon, label, href, collapsed, hasChi
             collapsed ? "justify-center" : ""
           }`}
         >
-          <Icon className="text-lg" />
+          <Icon className="text-lg text-secondary" />
           {!collapsed && <span>{label}</span>}
           {hasChildren && !collapsed && <span className="ml-auto">{open ? "▾" : "▸"}</span>}
         </button>

@@ -6,7 +6,7 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Area,
+  Bar,
   Line,
   ComposedChart,
 } from "recharts";
@@ -111,11 +111,11 @@ export default function PortfolioChart() {
 
             <Tooltip content={<CustomTooltip />} />
 
-            <Area
-              type="monotone"
+            <Bar
               dataKey="value"
-              stroke="none"
-              fill="url(#lineGradient)"
+              fill="#bfff00"
+              radius={[4, 4, 0, 0]}
+              barSize={30}
             />
 
             <Line

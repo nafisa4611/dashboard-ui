@@ -80,7 +80,7 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
         </div>
 
         {/* Menu */}
-        <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto text-secondary">
           {menuItems.map((item) => (
             <div key={item.label}>
               <SidebarItem

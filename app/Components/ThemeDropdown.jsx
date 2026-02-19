@@ -13,6 +13,7 @@ const themes = [
   { id: "coffee", label: "Coffee", icon: "☕" },
   { id: "cyberpunk", label: "Cyberpunk", icon: "⚡" },
   { id: "forest", label: "Forest", icon: "🌲" },
+  { id: "noble", label: "Noble", icon: "💎" },
 ];
 
 export default function ThemeDropdown() {
