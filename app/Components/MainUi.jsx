@@ -173,6 +173,7 @@ export default function MainUI() {
                         </tbody>
                     </table>
                 </div>
+                
             </GlassCard>
         </main>
     );

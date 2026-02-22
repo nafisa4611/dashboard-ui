@@ -49,7 +49,7 @@ export default function SavingsGoal() {
           </defs>
         </svg>
 
-        <div className="absolute text-center">
+        <div className="">
           <p className="text-lg font-semibold text-textColor">
             {progress}%
           </p>

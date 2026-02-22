@@ -46,7 +46,8 @@ function CustomTooltip({ active, payload, label }) {
 
 export default function CashFlowChart() {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full h-[260px]">
+      <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} barGap={6} barCategoryGap={20}>
         {/* Gradient Colors */}
         <defs>
@@ -88,5 +89,6 @@ export default function CashFlowChart() {
         <Bar dataKey="expense" fill="url(#expense)" radius={[6, 6, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
+    </div>
   );
 }

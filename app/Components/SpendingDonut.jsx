@@ -27,7 +27,17 @@ export default function SpendingDonut() {
 
       <div className="relative flex-1 flex items-center justify-center">
 
-        <Doughnut data={data} />
+        <Doughnut
+          data={data}
+          options={{
+            cutout: "70%",
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: true },
+            },
+          }}
+        />
+
 
         {/* Center */}
         <div className="absolute text-center">

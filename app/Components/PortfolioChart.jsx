@@ -9,6 +9,7 @@ import {
   Area,
   Line,
   ComposedChart,
+  ReferenceLine,
 } from "recharts";
 
 const data = [
@@ -27,127 +28,75 @@ const data = [
 ];
 
 function CustomTooltip({ active, payload, label }) {
-  if (active && payload && payload.length) {
-    return (
-      <div
-        className="
-        backdrop-blur-xl bg-surface/80
-        border border-border
-        rounded-xl px-4 py-3 shadow-xl
-      "
-      >
-        <p className="text-xs text-muted mb-1">{label}</p>
-        <p className="text-sm font-semibold text-secondary">
-          ${payload[0].value}
-        </p>
-      </div>
-    );
-  }
-  return null;
+  if (!active || !payload?.length) return null;
+
+  return (
+    <div className="bg-surface/90 backdrop-blur border border-border rounded-xl px-4 py-2 shadow-xl">
+      <p className="text-xs text-muted">{label}</p>
+      <p className="text-sm font-semibold text-primary">
+        ${payload[0].value.toLocaleString()}
+      </p>
+    </div>
+  );
 }
 
 export default function PortfolioChart() {
   return (
-    <div
-      className="
-      relative w-full h-full p-6 rounded-3xl overflow-hidden
-      bg-gradient-to-br from-white/60 to-white/30
-      dark:from-white/10 dark:to-white/5
-      backdrop-blur-xl
-      border border-white/20
-      shadow-[0_8px_30px_rgba(0,0,0,0.08)]
-      hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)]
-      transition-all duration-500
-    "
-    >
-      {/* Glow */}
-      <div className="absolute -top-24 -right-24 w-72 h-72 bg-primary/20 rounded-full blur-3xl opacity-40" />
+    <div className="w-full h-full">
+      <ResponsiveContainer width="100%" aspect={2.6}>
+        <ComposedChart data={data}>
+          <defs>
+            <linearGradient id="portfolioGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#2563EB" stopOpacity={0.35} />
+              <stop offset="100%" stopColor="#2563EB" stopOpacity={0.02} />
+            </linearGradient>
+          </defs>
 
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6 relative z-10">
-        <div>
-          <h3 className="text-textColor font-semibold text-lg">
-            Portfolio Value
-          </h3>
+          <CartesianGrid
+            vertical={false}
+            strokeOpacity={0.08}
+          />
 
-          <p className="text-3xl font-bold text-primary mt-1">$9,390</p>
+          <XAxis
+            dataKey="name"
+            tick={{ fill: "#9CA3AF", fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+          />
 
-          <span className="text-green-500 text-sm font-medium">
-            +18.2% this year
-          </span>
-        </div>
-      </div>
+          <YAxis
+            tick={{ fill: "#9CA3AF", fontSize: 12 }}
+            axisLine={false}
+            tickLine={false}
+          />
 
-      {/* Chart */}
-      <div className="w-full h-[260px] relative z-10">
-        <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data}>
-            <defs>
-              <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.8} />
-                <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.05} />
-              </linearGradient>
-            </defs>
+          <Tooltip content={<CustomTooltip />} />
 
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="#9CA3AF"
-              vertical={false}
-              opacity={0.2}
-            />
+          {/* Target / Average Line */}
+          <ReferenceLine
+            y={6000}
+            stroke="#9CA3AF"
+            strokeDasharray="4 4"
+            strokeOpacity={0.5}
+          />
 
-            <XAxis
-              dataKey="name"
-              tick={{ fontSize: 12, fill: "#9CA3AF" }}
-              axisLine={false}
-              tickLine={false}
-            />
+          <Area
+            type="monotone"
+            dataKey="value"
+            fill="url(#portfolioGrad)"
+            stroke="none"
+          />
 
-            <YAxis
-              tick={{ fontSize: 12, fill: "#9CA3AF" }}
-              axisLine={false}
-              tickLine={false}
-            />
-
-            <Tooltip content={<CustomTooltip />} />
-
-            <Area
-              type="monotone"
-              dataKey="value"
-              stroke="none"
-              fill="url(#lineGradient)"
-            />
-
-            <Line
-              type="monotone"
-              dataKey="value"
-              stroke="#06b6d4"
-              strokeWidth={3}
-              dot={false}
-              activeDot={{
-                r: 6,
-                fill: "#06b6d4",
-                stroke: "white",
-                strokeWidth: 2,
-              }}
-            />
-          </ComposedChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* FLOATING STAT */}
-      <div
-        className="
-    absolute top-6 right-6
-    hidden lg:block
-    bg-surface/80 backdrop-blur
-    border border-border
-    rounded-xl px-4 py-3 shadow
-  "
-      >
-        <p className="text-xs text-muted">Monthly Profit</p>
-        <p className="text-sm font-semibold text-success">$1,240</p>
-      </div>
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke="#2563EB"
+            strokeWidth={3}
+            dot={false}
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
+      
     </div>
   );
 }
