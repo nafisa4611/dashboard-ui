@@ -1,5 +1,3 @@
-"use client";
-
 import { FiHome, FiPieChart, FiCreditCard, FiTrendingUp, FiTarget, FiSettings, FiMenu, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import SidebarItem from "./SidebarItem";
 import SidebarSubItem from "./SidebarSubItem";
@@ -10,7 +8,6 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
   const [openMenu, setOpenMenu] = useState(null);
 
   const toggleMenu = (menu) => setOpenMenu(openMenu === menu ? null : menu);
-
   const menuItems = [
     { icon: FiHome, label: "Dashboard", href: "/" },
     {
@@ -46,41 +43,43 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* 1. MOBILE OVERLAY*/}
       {mobileOpen && (
-        <div className="fixed inset-0 z-30 bg-black/30 md:hidden" onClick={() => setMobileOpen(false)} />
+        <div 
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden" 
+          onClick={() => setMobileOpen(false)} 
+        />
       )}
 
-      {/* Sidebar */}
+      {/* 2. SIDEBAR CONTAINER */}
       <aside
         className={`
-    fixed top-0 left-0 h-screen bg-surface border-r border-border flex flex-col
-    transition-all duration-300 z-40
-    ${collapsed ? "w-20" : "w-56"}
-    ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
-  `}
+          fixed top-0 left-0 h-screen bg-surface border-r border-border flex flex-col
+          transition-all duration-300 z-50 text-secondary
+          ${collapsed ? "w-20" : "w-64"}
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
+        `}
       >
+        {/* Logo Section */}
+        <div className="h-16 flex items-center justify-between px-6 border-b border-border">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-textColor font-bold">
+              {collapsed ? "F" : "FT"}
+            </div>
+            {!collapsed && <span className="text-lg font-bold text-textColor tracking-tight">FinTrack</span>}
+          </Link>
 
-        {/* Logo & Collapse */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-border">
-          {!collapsed ? (
-            <Link href="/" className="text-lg font-semibold text-primary">FinTrack</Link>
-          ) : (
-            <span className="text-lg font-semibold text-primary">FT</span>
-          )}
-
-          <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={() => setCollapsed(!collapsed)}
-              className="p-1 rounded hover:bg-surface-muted transition"
-            >
-              {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
-            </button>
-          </div>
+          {/* Collapse Toggle (Desktop only) */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="hidden md:flex p-1.5 rounded-lg hover:bg-surface-muted border border-border text-muted transition"
+          >
+            {collapsed ? <FiChevronRight /> : <FiChevronLeft />}
+          </button>
         </div>
 
-        {/* Menu */}
-        <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto text-secondary">
+        {/* Navigation Menu */}
+        <nav className="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => (
             <div key={item.label}>
               <SidebarItem
@@ -93,7 +92,7 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                 collapsed={collapsed}
               />
               {item.children && openMenu === item.key && !collapsed && (
-                <div className="ml-6 flex flex-col space-y-1 mt-1">
+                <div className="ml-9 flex flex-col space-y-1 mt-1 border-l border-border pl-4">
                   {item.children.map((sub) => (
                     <SidebarSubItem key={sub.label} label={sub.label} href={sub.href} />
                   ))}
@@ -103,19 +102,11 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
           ))}
         </nav>
 
-        {/* Settings */}
-        <div className="px-2 pb-4">
+        {/* Bottom Actions */}
+        <div className="p-4 border-t border-border">
           <SidebarItem icon={FiSettings} label="Settings" href="/settings" collapsed={collapsed} />
         </div>
       </aside>
-
-      {/* Mobile hamburger */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-surface border border-border rounded-md"
-        onClick={() => setMobileOpen(!mobileOpen)}
-      >
-        {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
-      </button>
     </>
   );
 }

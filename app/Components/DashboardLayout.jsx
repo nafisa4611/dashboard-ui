@@ -9,10 +9,7 @@ export default function DashboardLayout({ children }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    // bg-bg ensures the Noble theme background covers the whole screen
-    <div className="min-h-screen bg-bg flex transition-colors duration-300">
-      
-      {/* 1. Sidebar */}
+    <div className="min-h-screen bg-bg flex">
       <Sidebar 
         collapsed={collapsed} 
         setCollapsed={setCollapsed} 
@@ -20,17 +17,15 @@ export default function DashboardLayout({ children }) {
         setMobileOpen={setMobileOpen} 
       />
 
-      {/* 2. Content Area */}
-      {/* ml-20 or ml-56 offsets the content so it doesn't hide behind the fixed sidebar */}
-      <div className={`flex flex-col flex-1 transition-all duration-300 ${collapsed ? "md:ml-20" : "md:ml-56"}`}>
+      
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 
+        ${collapsed ? "md:ml-20" : "md:ml-64"}`}>
         
-        {/* Navbar sits at the top of the content area */}
-        <Navbar />
-
-        {/* Main UI / Page Content */}
-        <div className="flex-1 overflow-y-auto">
+        <Navbar setMobileOpen={setMobileOpen} />
+        
+        <main className="flex-1 p-4 md:p-8 overflow-x-hidden">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );
