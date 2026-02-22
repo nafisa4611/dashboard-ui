@@ -43,8 +43,8 @@ function CustomTooltip({ active, payload, label }) {
 
 export default function PortfolioChart() {
   return (
-    <div className="w-full h-full">
-      <ResponsiveContainer width="100%" aspect={2.6}>
+    <div className="w-full h-full min-h-[250px]"> 
+      <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data}>
           <defs>
             <linearGradient id="portfolioGrad" x1="0" y1="0" x2="0" y2="1">
