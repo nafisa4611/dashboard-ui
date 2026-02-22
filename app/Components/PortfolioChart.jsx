@@ -6,10 +6,11 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Area,
+  Bar,
   Line,
   ComposedChart,
   ReferenceLine,
+  Area,
 } from "recharts";
 
 const data = [

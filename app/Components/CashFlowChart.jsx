@@ -24,19 +24,11 @@ const data = [
 function CustomTooltip({ active, payload, label }) {
   if (active && payload && payload.length) {
     return (
-      <div className="
-          backdrop-blur-xl bg-surface/80
-          border border-border
-          rounded-xl px-4 py-3 shadow-xl
-        ">
-        <p className="text-xs text-muted mb-1">{label}</p>
+      <div className="backdrop-blur-xl bg-[#111111]/90 border border-zinc-800 rounded-xl px-4 py-3 shadow-2xl">
+        <p className="text-[10px] text-zinc-500 uppercase font-bold mb-2">{label}</p>
         <div className="space-y-1 text-sm">
-          <p className="text-purple-500 font-semibold">
-            Income: ${payload[0].value}
-          </p>
-          <p className="text-red-500 font-semibold">
-            Expense: ${payload[1].value}
-          </p>
+          <p className="text-[#bfff00] font-medium">Income: ${payload[0].value}</p>
+          <p className="text-zinc-400 font-medium">Expense: ${payload[1].value}</p>
         </div>
       </div>
     );
@@ -56,11 +48,7 @@ export default function CashFlowChart() {
             <stop offset="100%" stopColor="#c4b5fd" stopOpacity={0.5} /> {/* Light Purple */}
           </linearGradient>
 
-          <linearGradient id="expense" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#ef4444" stopOpacity={0.9} /> {/* Red */}
-            <stop offset="100%" stopColor="#fca5a5" stopOpacity={0.5} />
-          </linearGradient>
-        </defs>
+          <Tooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} content={<CustomTooltip />} />
 
         {/* Grid */}
         <CartesianGrid strokeDasharray="3 3" stroke="#9CA3AF" vertical={false} />
@@ -87,6 +75,7 @@ export default function CashFlowChart() {
         {/* Bars */}
         <Bar dataKey="income" fill="url(#income)" radius={[6, 6, 0, 0]} />
         <Bar dataKey="expense" fill="url(#expense)" radius={[6, 6, 0, 0]} />
+        </defs>
       </BarChart>
     </ResponsiveContainer>
     </div>
